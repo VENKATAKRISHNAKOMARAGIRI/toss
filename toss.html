@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Coin Toss (Color Names Only)</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, navy, darkslategray);
+        font-family: Arial, sans-serif;
+        color: white;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 40px;
+        margin-bottom: 30px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: white;
+    }
+
+    .coin {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: 0 auto;
+        background: radial-gradient(circle, gold, goldenrod);
+        box-shadow:
+            0 0 25px gold,
+            inset 0 0 20px black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 60px;
+        font-weight: bolder;
+        color: black;
+        transition: transform 1s ease-in-out;
+        transform-style: preserve-3d;
+    }
+
+    .flip {
+        animation: flipCoin 1s forwards;
+    }
+
+    @keyframes flipCoin {
+        0% { transform: rotateY(0deg); }
+        100% { transform: rotateY(1080deg); }
+    }
+
+    button {
+        margin-top: 30px;
+        padding: 15px 40px;
+        font-size: 22px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, cyan, blue);
+        color: white;
+        box-shadow: 0 5px 20px deepskyblue;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 25px deepskyblue;
+    }
+
+    #result {
+        margin-top: 30px;
+        font-size: 32px;
+        font-weight: bold;
+        text-shadow: 0 0 10px white;
+        color: white;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🎲 Coin Toss</h1>
+
+    <div id="coin" class="coin">?</div>
+
+    <button onclick="tossCoin()">Toss Coin</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function tossCoin() {
+    const coin = document.getElementById("coin");
+    const resultText = document.getElementById("result");
+
+    coin.classList.add("flip");
+
+    setTimeout(() => {
+        coin.classList.remove("flip");
+
+        // Random result
+        let result = Math.random() < 0.5 ? "HEAD" : "TAIL";
+
+        // Display on coin
+        coin.textContent = result === "HEAD" ? "H" : "T";
+
+        // Show result
+        resultText.textContent = "Result: " + result;
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
